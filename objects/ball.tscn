@@ -8,6 +8,7 @@ radius = 7.0
 
 [node name="ball" type="RigidBody2D"]
 z_index = 1
+contacts_reported = 4
 script = ExtResource( 2 )
 
 [node name="Sprite" type="Sprite" parent="."]
@@ -24,3 +25,24 @@ shape = SubResource( 1 )
 visible = false
 current = true
 zoom = Vector2( 0.5, 0.5 )
+
+[node name="arrow1" type="Sprite" parent="."]
+visible = false
+texture = ExtResource( 1 )
+vframes = 22
+hframes = 48
+frame = 1036
+
+[node name="arrow2" type="Sprite" parent="."]
+visible = false
+texture = ExtResource( 1 )
+vframes = 22
+hframes = 48
+frame = 1036
+
+[node name="arrow3" type="Sprite" parent="."]
+visible = false
+texture = ExtResource( 1 )
+vframes = 22
+hframes = 48
+frame = 1036
