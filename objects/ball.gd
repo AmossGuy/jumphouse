@@ -22,14 +22,15 @@ func _process(delta: float):
 	update_arrows(1 if launch_vec != Vector2.INF else 0, launch_vec.angle())
 
 func _input(event):
-	if event.is_action_pressed("launch") and is_on_floor():
+	if event.is_action_pressed("launch"):
 		var launch_vec := get_launch_vec()
 		if launch_vec != Vector2.INF:
 			velocity = launch_vec
 
 func test_launch(launch_vec: Vector2) -> Vector2:
-	var collision := move_and_collide(launch_vec, true, true, true)
-	return launch_vec if collision == null else Vector2.INF
+	var test_vec := launch_vec.normalized() * 8
+	var collision := move_and_collide(test_vec, true, true, true)
+	return launch_vec if collision == null and is_on_floor() else Vector2.INF
 
 func get_launch_vec() -> Vector2:
 	var launch_vec := get_local_mouse_position().rotated(rotation) \
