@@ -4,6 +4,7 @@ const GRAVITY := 98
 const FRICTION := 170
 const ARROW_OFFSET := 16
 const LAUNCH_FORCE := 100
+const FLOOR_SLIDE_RANGE := 45
 
 var velocity := Vector2.ZERO
 
@@ -27,9 +28,25 @@ func _input(event):
 		if launch_vec != Vector2.INF:
 			velocity = launch_vec
 
-func test_launch(launch_vec: Vector2) -> Vector2:
+func test_launch(v: Vector2) -> Vector2:
+	var launch_vec := v
 	var test_vec := launch_vec.normalized() * 8
 	var collision := move_and_collide(test_vec, true, true, true)
+	
+	if collision != null \
+		and launch_vec.angle() >= deg2rad(0) \
+		and launch_vec.angle() <= deg2rad(FLOOR_SLIDE_RANGE):
+			launch_vec = Vector2.RIGHT * launch_vec.length()
+			test_vec = launch_vec.normalized() * 8
+			collision = move_and_collide(test_vec, true, true, true)
+	
+	if collision != null \
+		and launch_vec.angle() >= deg2rad(FLOOR_SLIDE_RANGE + 90) \
+		and launch_vec.angle() <= deg2rad(180):
+			launch_vec = Vector2.LEFT * launch_vec.length()
+			test_vec = launch_vec.normalized() * 8
+			collision = move_and_collide(test_vec, true, true, true)
+	
 	return launch_vec if collision == null and is_on_floor() else Vector2.INF
 
 func get_launch_vec() -> Vector2:
@@ -45,5 +62,5 @@ func update_arrows(count: int, angle: float):
 		arrows[i].visible = i < count
 		arrows[i].global_rotation = angle
 		arrows[i].global_position = global_position \
-			+ get_local_mouse_position().rotated(rotation) \
+			+ Vector2.RIGHT.rotated(angle) \
 			.normalized() * ARROW_OFFSET * (i+1)
