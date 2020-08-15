@@ -11,6 +11,8 @@ const FRICTION := 170
 const ARROW_OFFSET := 16
 const LAUNCH_FORCE := 100
 const FLOOR_SLIDE_RANGE := 45
+const WALL_SLIDE_ANGLE := 5
+const WALL_SLIDE_RANGE := 70
 
 var velocity := Vector2.ZERO
 var special_launch = false
@@ -24,7 +26,9 @@ func _process(delta: float):
 		elif velocity.x < 0:
 			velocity.x += FRICTION * delta
 			velocity.x = min(velocity.x, 0)
-	velocity = move_and_slide(velocity, Vector2.UP)
+	var slid_velocity = move_and_slide(velocity, Vector2.UP)
+	if not (is_on_wall() and velocity.y < 0):
+		velocity = slid_velocity
 	
 	var launch_vec := get_launch_vec()
 	update_arrows(1 if launch_vec != Vector2.INF else 0, launch_vec.angle())
@@ -56,6 +60,22 @@ func test_launch(v: Vector2) -> Vector2:
 		and launch_vec.angle() <= deg2rad(180):
 			launch_vec = Vector2.LEFT * launch_vec.length()
 			test_vec = launch_vec.normalized() * 8
+			collision = move_and_collide(test_vec, true, true, true)
+	
+	if collision != null \
+		and launch_vec.angle() >= deg2rad(-90) \
+		and launch_vec.angle() <= deg2rad(-90 + WALL_SLIDE_RANGE):
+			launch_vec = Vector2.UP.rotated(deg2rad(WALL_SLIDE_ANGLE)) \
+				* launch_vec.length()
+			test_vec = Vector2.UP * 8
+			collision = move_and_collide(test_vec, true, true, true)
+	
+	if collision != null \
+		and launch_vec.angle() >= deg2rad(-90 - WALL_SLIDE_RANGE) \
+		and launch_vec.angle() <= deg2rad(-90):
+			launch_vec = Vector2.UP.rotated(deg2rad(-WALL_SLIDE_ANGLE)) \
+				* launch_vec.length()
+			test_vec = Vector2.UP * 8
 			collision = move_and_collide(test_vec, true, true, true)
 	
 	return launch_vec if collision == null and launch_charged() else Vector2.INF
