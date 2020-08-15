@@ -1,0 +1,22 @@
+[gd_scene load_steps=4 format=2]
+
+[ext_resource path="res://objects/spring.tscn" type="PackedScene" id=1]
+[ext_resource path="res://objects/ball.tscn" type="PackedScene" id=2]
+[ext_resource path="res://colored_transparent_packed.tres" type="TileSet" id=3]
+
+[node name="Node2D" type="Node2D"]
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="spring" parent="." instance=ExtResource( 1 )]
+position = Vector2( -8, 40 )
+
+[node name="ball" parent="." instance=ExtResource( 2 )]
+position = Vector2( -40, 25 )
+
+[node name="TileMap" type="TileMap" parent="."]
+tile_set = ExtResource( 3 )
+cell_size = Vector2( 16, 16 )
+format = 1
+tile_data = PoolIntArray( -196611, 536870912, 131083, -196610, 536870912, 131083, -196609, 536870912, 131083, -262144, 536870912, 131083, -262143, 536870912, 131083, -262142, 536870912, 131083, -262141, 536870912, 131083, -131076, 536870912, 131084, -196605, 536870912, 131083, -65540, 1073741824, 131080, -131069, 536870912, 131083, -4, 1073741824, 131080, -65533, 536870912, 131083, 65532, 1073741824, 131080, 3, 536870912, 131083, 131068, 1073741824, 131080, 65539, 536870912, 131083, 196604, 1073741824, 131081, 196605, -536870912, 131080, 196606, 536870912, 131081, 131072, 0, 131081, 131073, -536870912, 131080, 131074, -536870912, 131084, 262142, 1073741824, 131081, 262143, -536870912, 131080, 196608, 1610612736, 131081 )
