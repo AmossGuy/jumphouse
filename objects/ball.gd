@@ -9,8 +9,21 @@ func is_class(name: String):
 var on_floor := false
 var special_launch := false
 
-func update_arrows(count: int, dir: float):
+func update_arrows(count: int, angle: float):
 	var arrows := [$arrow1, $arrow2, $arrow3]
+	
+	for i in range(arrows.size()):
+		arrows[i].visible = i < count
+		arrows[i].global_rotation = angle
+		arrows[i].global_position = global_position \
+			+ get_local_mouse_position().rotated(rotation) \
+			.normalized() * 16 * (i+1)
+
+func _process(delta):
+	update_arrows(
+		1 if (on_floor or special_launch) else 0,
+		get_local_mouse_position().rotated(rotation).angle()
+	)
 
 func _input(event):
 	if event.is_action_pressed("launch") and (on_floor or special_launch):

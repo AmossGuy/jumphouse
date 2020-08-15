@@ -31,18 +31,18 @@ visible = false
 texture = ExtResource( 1 )
 vframes = 22
 hframes = 48
-frame = 1036
+frame = 1037
 
 [node name="arrow2" type="Sprite" parent="."]
 visible = false
 texture = ExtResource( 1 )
 vframes = 22
 hframes = 48
-frame = 1036
+frame = 1037
 
 [node name="arrow3" type="Sprite" parent="."]
 visible = false
 texture = ExtResource( 1 )
 vframes = 22
 hframes = 48
-frame = 1036
+frame = 1037
