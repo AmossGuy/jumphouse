@@ -16,7 +16,11 @@ func _input(event):
 	if event.is_action_pressed("launch") and (on_floor or special_launch):
 		special_launch = false
 		var mouse_vec = get_local_mouse_position().rotated(rotation)
-		set_linear_velocity(Vector2.ZERO)
+		linear_velocity = linear_velocity \
+			.rotated(-mouse_vec.angle())
+		linear_velocity.y = 0
+		linear_velocity = linear_velocity \
+			.rotated(mouse_vec.angle())
 		apply_central_impulse(mouse_vec.normalized() * 100)
 
 func _integrate_forces(s):
