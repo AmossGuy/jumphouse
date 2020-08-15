@@ -27,7 +27,7 @@ __meta__ = {
 }
 
 [node name="ball" parent="." instance=ExtResource( 2 )]
-position = Vector2( -24, 25 )
+position = Vector2( -24, 24 )
 
 [node name="TileMap" type="TileMap" parent="."]
 tile_set = ExtResource( 3 )
@@ -48,7 +48,6 @@ __meta__ = {
 [node name="AnimatedSprite" type="AnimatedSprite" parent="."]
 position = Vector2( -24, -8 )
 frames = SubResource( 3 )
-frame = 1
 playing = true
 
 [node name="spring" parent="." instance=ExtResource( 1 )]
