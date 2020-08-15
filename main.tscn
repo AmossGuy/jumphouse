@@ -41,5 +41,4 @@ tile_data = PoolIntArray( -196611, 536870912, 131083, -196610, 536870912, 131083
 [node name="AnimatedSprite" type="AnimatedSprite" parent="."]
 position = Vector2( -24, -24 )
 frames = SubResource( 3 )
-frame = 1
 playing = true

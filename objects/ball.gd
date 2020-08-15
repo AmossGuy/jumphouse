@@ -1,13 +1,22 @@
 extends RigidBody2D
 
-var on_floor = false
+class_name ball
+func get_class():
+	return "ball"
+func is_class(name: String):
+   return .is_class(name) or (get_class() == name)
+
+var on_floor := false
+var special_launch := false
 
 func update_arrows(count: int, dir: float):
 	var arrows := [$arrow1, $arrow2, $arrow3]
 
 func _input(event):
-	if event.is_action_pressed("launch") and on_floor:
+	if event.is_action_pressed("launch") and (on_floor or special_launch):
+		special_launch = false
 		var mouse_vec = get_local_mouse_position().rotated(rotation)
+		set_linear_velocity(Vector2.ZERO)
 		apply_central_impulse(mouse_vec.normalized() * 100)
 
 func _integrate_forces(s):
