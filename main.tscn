@@ -48,7 +48,9 @@ __meta__ = {
 [node name="AnimatedSprite" type="AnimatedSprite" parent="."]
 position = Vector2( -24, -8 )
 frames = SubResource( 3 )
+frame = 1
 playing = true
 
 [node name="spring" parent="." instance=ExtResource( 1 )]
 position = Vector2( 872, -56 )
+STRENGTH = 140

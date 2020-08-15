@@ -1,5 +1,11 @@
 extends KinematicBody2D
 
+class_name ball
+func get_class():
+	return "ball"
+func is_class(name: String):
+   return .is_class(name) or (get_class() == name)
+
 const GRAVITY := 98
 const FRICTION := 170
 const ARROW_OFFSET := 16
@@ -7,6 +13,7 @@ const LAUNCH_FORCE := 100
 const FLOOR_SLIDE_RANGE := 45
 
 var velocity := Vector2.ZERO
+var special_launch = false
 
 func _process(delta: float):
 	velocity += Vector2.DOWN * GRAVITY * delta
@@ -26,7 +33,11 @@ func _input(event):
 	if event.is_action_pressed("launch"):
 		var launch_vec := get_launch_vec()
 		if launch_vec != Vector2.INF:
+			special_launch = false
 			velocity = launch_vec
+
+func launch_charged() -> bool:
+	return is_on_floor() or special_launch
 
 func test_launch(v: Vector2) -> Vector2:
 	var launch_vec := v
@@ -47,7 +58,7 @@ func test_launch(v: Vector2) -> Vector2:
 			test_vec = launch_vec.normalized() * 8
 			collision = move_and_collide(test_vec, true, true, true)
 	
-	return launch_vec if collision == null and is_on_floor() else Vector2.INF
+	return launch_vec if collision == null and launch_charged() else Vector2.INF
 
 func get_launch_vec() -> Vector2:
 	var launch_vec := get_local_mouse_position().rotated(rotation) \

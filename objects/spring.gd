@@ -1,21 +1,14 @@
 extends Area2D
 
+export var STRENGTH := 100
+
 func _on_spring_body_entered(body):
-	if body.is_class("RigidBody2D"):
-		body.linear_velocity = body.linear_velocity \
-			.rotated(-global_rotation)
-		body.linear_velocity.y = 0
-		body.linear_velocity = body.linear_velocity \
-			.rotated(global_rotation)
-		body.apply_impulse(
-			position - body.position,
-			Vector2(0, -150).rotated(rotation)
-		)
+	if body.is_class("ball"):
+		body.velocity = Vector2.RIGHT.rotated(rotation - deg2rad(90)) * STRENGTH
+		body.special_launch = true
+		
 		$AnimatedSprite.stop()
 		$AnimatedSprite.play("spring")
-		
-		if body.is_class("ball"):
-			body.special_launch = true
 
 func _on_AnimatedSprite_animation_finished():
 	if $AnimatedSprite.animation == "spring":
