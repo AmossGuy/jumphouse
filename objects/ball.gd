@@ -8,8 +8,10 @@ func is_class(name: String):
 
 const GRAVITY := 98
 const FRICTION := 170
-const ARROW_OFFSET := 16
-const LAUNCH_FORCE := 100
+const MIN_ARROW_OFFSET := 14
+const MAX_ARROW_OFFSET := 20
+const MIN_LAUNCH_FORCE := 20
+const MAX_LAUNCH_FORCE := 100
 const FLOOR_SLIDE_RANGE := 45
 const WALL_SLIDE_ANGLE := 20
 const WALL_SLIDE_RANGE := 70
@@ -40,7 +42,10 @@ func _physics_process(delta: float):
 		arrow_count += int(
 			double_jump_charged and (is_on_floor() or special_launch)
 		)
-	update_arrows(arrow_count, launch_vec.angle())
+	var m: float = 1 / float(MAX_LAUNCH_FORCE - MIN_LAUNCH_FORCE)
+	var b: float = MIN_LAUNCH_FORCE / float(MIN_LAUNCH_FORCE - MAX_LAUNCH_FORCE)
+	var power: float = m * launch_vec.length() + b
+	update_arrows(arrow_count, launch_vec.angle(), power)
 
 func _input(event):
 	if event.is_action_pressed("launch"):
@@ -95,17 +100,25 @@ func test_launch(v: Vector2) -> Vector2:
 	return launch_vec if collision == null and launch_charged() else Vector2.INF
 
 func get_launch_vec() -> Vector2:
-	var launch_vec := get_local_mouse_position().rotated(rotation) \
-		.normalized() * LAUNCH_FORCE
+	var launch_vec := get_local_mouse_position().rotated(rotation) * 2
+	if launch_vec.length() < MIN_LAUNCH_FORCE:
+		launch_vec = launch_vec.normalized() * MIN_LAUNCH_FORCE
+	if launch_vec.length() > MAX_LAUNCH_FORCE:
+		launch_vec = launch_vec.normalized() * MAX_LAUNCH_FORCE
 	launch_vec = test_launch(launch_vec)
 	return launch_vec
 
-func update_arrows(count: int, angle: float):
+func update_arrows(count: int, angle: float, power: float):
+	if power < 0 or power > 1: pass
+	
 	var arrows := [$arrow1, $arrow2, $arrow3]
+	
+	var arrow_offset := MIN_ARROW_OFFSET \
+		+ (MAX_ARROW_OFFSET - MIN_ARROW_OFFSET) * power
 	
 	for i in range(arrows.size()):
 		arrows[i].visible = i < count
 		arrows[i].global_rotation = angle
 		arrows[i].global_position = global_position \
 			+ Vector2.RIGHT.rotated(angle) \
-			.normalized() * ARROW_OFFSET * (i+1)
+			.normalized() * arrow_offset * (i+1)
