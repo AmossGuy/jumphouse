@@ -1,4 +1,4 @@
-[gd_scene load_steps=12 format=2]
+[gd_scene load_steps=13 format=2]
 
 [ext_resource path="res://colored_transparent_packed.tres" type="TileSet" id=1]
 [ext_resource path="res://objects/ball.tscn" type="PackedScene" id=2]
@@ -8,6 +8,7 @@
 [ext_resource path="res://objects/powerup_dj.tscn" type="PackedScene" id=6]
 [ext_resource path="res://objects/kill_area.gd" type="Script" id=7]
 [ext_resource path="res://win_area.gd" type="Script" id=8]
+[ext_resource path="res://sounds/splash.wav" type="AudioStream" id=9]
 
 [sub_resource type="AtlasTexture" id=1]
 atlas = ExtResource( 3 )
@@ -56,6 +57,7 @@ __meta__ = {
 [node name="AnimatedSprite" type="AnimatedSprite" parent="."]
 position = Vector2( 480, -280 )
 frames = SubResource( 3 )
+frame = 1
 playing = true
 
 [node name="spring" parent="." instance=ExtResource( 4 )]
@@ -91,6 +93,9 @@ destination = NodePath("../dest1")
 
 [node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="kill_area"]
 polygon = PoolVector2Array( 0, 0, 176, 0, 176, 128, 480, 128, 480, 32, 608, 32, 608, 0, 752, 0, 752, 224, 0, 224 )
+
+[node name="splash_sound" type="AudioStreamPlayer2D" parent="kill_area"]
+stream = ExtResource( 9 )
 
 [node name="ColorRect2" type="ColorRect" parent="."]
 margin_left = 1040.0
