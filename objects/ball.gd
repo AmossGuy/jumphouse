@@ -35,8 +35,11 @@ func _physics_process(delta: float):
 		velocity = slid_velocity
 	
 	var launch_vec := get_launch_vec()
-	var arrow_count = int(launch_vec != Vector2.INF) \
-		+ int(double_jump_charged and (is_on_floor() or special_launch))
+	var arrow_count = int(launch_vec != Vector2.INF)
+	if arrow_count != 0:
+		arrow_count += int(
+			double_jump_charged and (is_on_floor() or special_launch)
+		)
 	update_arrows(arrow_count, launch_vec.angle())
 
 func _input(event):
