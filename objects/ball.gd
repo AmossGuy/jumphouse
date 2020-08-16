@@ -48,6 +48,9 @@ func _input(event):
 		if launch_vec != Vector2.INF:
 			if not (is_on_floor() or special_launch):
 				double_jump_charged = false
+				$double_jump_sound.play()
+			else:
+				$jump_sound.play()
 			special_launch = false
 			velocity = launch_vec
 

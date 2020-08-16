@@ -1,7 +1,8 @@
-[gd_scene load_steps=9 format=2]
+[gd_scene load_steps=10 format=2]
 
 [ext_resource path="res://colored_transparent_packed.png" type="Texture" id=1]
 [ext_resource path="res://objects/spring.gd" type="Script" id=2]
+[ext_resource path="res://sounds/spring.wav" type="AudioStream" id=3]
 
 [sub_resource type="AtlasTexture" id=1]
 atlas = ExtResource( 1 )
@@ -45,5 +46,9 @@ frames = SubResource( 5 )
 visible = false
 position = Vector2( 0, 4 )
 shape = SubResource( 6 )
+
+[node name="spring_sound" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource( 3 )
+volume_db = 6.0
 [connection signal="body_entered" from="." to="." method="_on_spring_body_entered"]
 [connection signal="animation_finished" from="AnimatedSprite" to="." method="_on_AnimatedSprite_animation_finished"]

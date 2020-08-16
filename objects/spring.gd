@@ -11,6 +11,7 @@ func _on_spring_body_entered(body):
 		
 		$AnimatedSprite.stop()
 		$AnimatedSprite.play("spring")
+		$spring_sound.play()
 
 func _on_AnimatedSprite_animation_finished():
 	if $AnimatedSprite.animation == "spring":
