@@ -16,10 +16,14 @@ const WALL_SLIDE_RANGE := 70
 
 var velocity := Vector2.ZERO
 var special_launch = false
+var has_double_jump = false
+var double_jump_charged = false
 
-func _process(delta: float):
+func _physics_process(delta: float):
 	velocity += Vector2.DOWN * GRAVITY * delta
 	if is_on_floor():
+		if has_double_jump:
+			double_jump_charged = true
 		if velocity.x > 0:
 			velocity.x -= FRICTION * delta
 			velocity.x = max(velocity.x, 0)
@@ -31,17 +35,20 @@ func _process(delta: float):
 		velocity = slid_velocity
 	
 	var launch_vec := get_launch_vec()
-	update_arrows(1 if launch_vec != Vector2.INF else 0, launch_vec.angle())
+	var arrow_count = int(launch_vec != Vector2.INF) \
+		+ int(double_jump_charged and is_on_floor())
+	update_arrows(arrow_count, launch_vec.angle())
 
 func _input(event):
 	if event.is_action_pressed("launch"):
 		var launch_vec := get_launch_vec()
 		if launch_vec != Vector2.INF:
 			special_launch = false
+			if not is_on_floor(): double_jump_charged = false
 			velocity = launch_vec
 
 func launch_charged() -> bool:
-	return is_on_floor() or special_launch
+	return is_on_floor() or special_launch or double_jump_charged
 
 func test_launch(v: Vector2) -> Vector2:
 	var launch_vec := v

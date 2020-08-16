@@ -1,9 +1,10 @@
-[gd_scene load_steps=8 format=2]
+[gd_scene load_steps=9 format=2]
 
 [ext_resource path="res://objects/spring.tscn" type="PackedScene" id=1]
 [ext_resource path="res://objects/ball.tscn" type="PackedScene" id=2]
 [ext_resource path="res://colored_transparent_packed.tres" type="TileSet" id=3]
 [ext_resource path="res://colored_transparent_packed.png" type="Texture" id=4]
+[ext_resource path="res://objects/powerup_dj.tscn" type="PackedScene" id=5]
 
 [sub_resource type="AtlasTexture" id=1]
 atlas = ExtResource( 4 )
@@ -53,3 +54,6 @@ playing = true
 [node name="spring" parent="." instance=ExtResource( 1 )]
 position = Vector2( 872, -56 )
 STRENGTH = 140
+
+[node name="powerup_dj" parent="." instance=ExtResource( 5 )]
+position = Vector2( 704, -184 )
