@@ -11,7 +11,7 @@ const FRICTION := 170
 const ARROW_OFFSET := 16
 const LAUNCH_FORCE := 100
 const FLOOR_SLIDE_RANGE := 45
-const WALL_SLIDE_ANGLE := 5
+const WALL_SLIDE_ANGLE := 20
 const WALL_SLIDE_RANGE := 70
 
 var velocity := Vector2.ZERO
