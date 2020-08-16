@@ -36,15 +36,16 @@ func _physics_process(delta: float):
 	
 	var launch_vec := get_launch_vec()
 	var arrow_count = int(launch_vec != Vector2.INF) \
-		+ int(double_jump_charged and is_on_floor())
+		+ int(double_jump_charged and (is_on_floor() or special_launch))
 	update_arrows(arrow_count, launch_vec.angle())
 
 func _input(event):
 	if event.is_action_pressed("launch"):
 		var launch_vec := get_launch_vec()
 		if launch_vec != Vector2.INF:
+			if not (is_on_floor() or special_launch):
+				double_jump_charged = false
 			special_launch = false
-			if not is_on_floor(): double_jump_charged = false
 			velocity = launch_vec
 
 func launch_charged() -> bool:
