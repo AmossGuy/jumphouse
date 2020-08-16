@@ -1,6 +1,6 @@
 extends Area2D
 
-export var STRENGTH := 100
+export var STRENGTH := 150
 
 func _on_spring_body_entered(body):
 	if body.is_class("ball"):
