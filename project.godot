@@ -20,7 +20,7 @@ _global_script_class_icons={
 
 [application]
 
-config/name="Game for Miz Jam 1"
+config/name="Jumphouse"
 run/main_scene="res://level1.tscn"
 config/icon="res://icon.png"
 
