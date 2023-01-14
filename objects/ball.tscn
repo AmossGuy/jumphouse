@@ -1,8 +1,8 @@
 [gd_scene load_steps=5 format=2]
 
-[ext_resource path="res://colored_transparent_packed.png" type="Texture" id=1]
 [ext_resource path="res://objects/ball.gd" type="Script" id=2]
 [ext_resource path="res://sounds/jump.wav" type="AudioStream" id=3]
+[ext_resource path="res://graphics.webp" type="Texture" id=4]
 
 [sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 7, 7 )
@@ -13,10 +13,9 @@ script = ExtResource( 2 )
 
 [node name="Sprite" type="Sprite" parent="."]
 position = Vector2( 0, 1 )
-texture = ExtResource( 1 )
-vframes = 22
-hframes = 48
-frame = 1009
+texture = ExtResource( 4 )
+region_enabled = true
+region_rect = Rect2( 32, 32, 16, 16 )
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 visible = false
@@ -30,24 +29,21 @@ zoom = Vector2( 0.5, 0.5 )
 
 [node name="arrow1" type="Sprite" parent="."]
 visible = false
-texture = ExtResource( 1 )
-vframes = 22
-hframes = 48
-frame = 1037
+texture = ExtResource( 4 )
+region_enabled = true
+region_rect = Rect2( 0, 48, 16, 16 )
 
 [node name="arrow2" type="Sprite" parent="."]
 visible = false
-texture = ExtResource( 1 )
-vframes = 22
-hframes = 48
-frame = 1037
+texture = ExtResource( 4 )
+region_enabled = true
+region_rect = Rect2( 0, 48, 16, 16 )
 
 [node name="arrow3" type="Sprite" parent="."]
 visible = false
-texture = ExtResource( 1 )
-vframes = 22
-hframes = 48
-frame = 1037
+texture = ExtResource( 4 )
+region_enabled = true
+region_rect = Rect2( 0, 48, 16, 16 )
 
 [node name="jump_sound" type="AudioStreamPlayer2D" parent="."]
 stream = ExtResource( 3 )

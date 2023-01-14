@@ -1,8 +1,7 @@
 [gd_scene load_steps=17 format=2]
 
-[ext_resource path="res://colored_transparent_packed.tres" type="TileSet" id=1]
+[ext_resource path="res://tileset.tres" type="TileSet" id=1]
 [ext_resource path="res://objects/ball.tscn" type="PackedScene" id=2]
-[ext_resource path="res://colored_transparent_packed.png" type="Texture" id=3]
 [ext_resource path="res://objects/spring.tscn" type="PackedScene" id=4]
 [ext_resource path="res://tile_replacer.gd" type="Script" id=5]
 [ext_resource path="res://objects/powerup_dj.tscn" type="PackedScene" id=6]
@@ -13,14 +12,15 @@
 [ext_resource path="res://center.gd" type="Script" id=11]
 [ext_resource path="res://sounds/win.wav" type="AudioStream" id=12]
 [ext_resource path="res://start_animated_sprite.gd" type="Script" id=13]
+[ext_resource path="res://graphics.webp" type="Texture" id=14]
 
 [sub_resource type="AtlasTexture" id=1]
-atlas = ExtResource( 3 )
-region = Rect2( 448, 240, 16, 16 )
+atlas = ExtResource( 14 )
+region = Rect2( 0, 64, 16, 16 )
 
 [sub_resource type="AtlasTexture" id=2]
-atlas = ExtResource( 3 )
-region = Rect2( 464, 240, 16, 16 )
+atlas = ExtResource( 14 )
+region = Rect2( 16, 64, 16, 16 )
 
 [sub_resource type="SpriteFrames" id=3]
 animations = [ {
@@ -91,10 +91,9 @@ __meta__ = {
 
 [node name="Sprite" type="Sprite" parent="."]
 position = Vector2( 816, -1688 )
-texture = ExtResource( 3 )
-vframes = 22
-hframes = 48
-frame = 401
+texture = ExtResource( 14 )
+region_enabled = true
+region_rect = Rect2( 48, 64, 16, 16 )
 
 [node name="win_area" type="Area2D" parent="."]
 position = Vector2( 800, -1632 )
@@ -137,52 +136,45 @@ __meta__ = {
 
 [node name="Sprite" type="Sprite" parent="win_screen/Node2D/Node2D"]
 position = Vector2( -48, 0 )
-texture = ExtResource( 3 )
-vframes = 22
-hframes = 48
-frame = 958
+texture = ExtResource( 14 )
+region_enabled = true
+region_rect = Rect2( 0, 96, 16, 16 )
 
 [node name="Sprite2" type="Sprite" parent="win_screen/Node2D/Node2D"]
 position = Vector2( -32, 0 )
-texture = ExtResource( 3 )
-vframes = 22
-hframes = 48
-frame = 948
+texture = ExtResource( 14 )
+region_enabled = true
+region_rect = Rect2( 32, 80, 16, 16 )
 
 [node name="Sprite7" type="Sprite" parent="win_screen/Node2D/Node2D"]
 position = Vector2( 37, 0 )
-texture = ExtResource( 3 )
-vframes = 22
-hframes = 48
-frame = 947
+texture = ExtResource( 14 )
+region_enabled = true
+region_rect = Rect2( 16, 80, 16, 16 )
 
 [node name="Sprite8" type="Sprite" parent="win_screen/Node2D/Node2D"]
 position = Vector2( 48, 0 )
-texture = ExtResource( 3 )
-vframes = 22
-hframes = 48
-frame = 659
+texture = ExtResource( 14 )
+region_enabled = true
+region_rect = Rect2( 64, 64, 16, 16 )
 
 [node name="Sprite3" type="Sprite" parent="win_screen/Node2D/Node2D"]
 position = Vector2( -16, 0 )
-texture = ExtResource( 3 )
-vframes = 22
-hframes = 48
-frame = 954
+texture = ExtResource( 14 )
+region_enabled = true
+region_rect = Rect2( 48, 80, 16, 16 )
 
 [node name="Sprite4" type="Sprite" parent="win_screen/Node2D/Node2D"]
 position = Vector2( 8, 0 )
-texture = ExtResource( 3 )
-vframes = 22
-hframes = 48
-frame = 956
+texture = ExtResource( 14 )
+region_enabled = true
+region_rect = Rect2( 64, 80, 16, 16 )
 
 [node name="Sprite6" type="Sprite" parent="win_screen/Node2D/Node2D"]
 position = Vector2( 23, 0 )
-texture = ExtResource( 3 )
-vframes = 22
-hframes = 48
-frame = 907
+texture = ExtResource( 14 )
+region_enabled = true
+region_rect = Rect2( 0, 80, 16, 16 )
 
 [node name="powerup_dj" parent="." instance=ExtResource( 6 )]
 position = Vector2( 2072, -136 )
@@ -289,10 +281,9 @@ __meta__ = {
 [node name="Sprite" type="Sprite" parent="2nd_go"]
 position = Vector2( 1160, -440 )
 rotation = -0.785398
-texture = ExtResource( 3 )
-vframes = 22
-hframes = 48
-frame = 988
+texture = ExtResource( 14 )
+region_enabled = true
+region_rect = Rect2( 32, 64, 16, 16 )
 
 [node name="spring4" parent="." instance=ExtResource( 4 )]
 position = Vector2( 920, -472 )
