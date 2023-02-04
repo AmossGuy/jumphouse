@@ -229,7 +229,6 @@ rotation = 0.392699
 position = Vector2( 2072, -520 )
 
 [node name="2nd_go" type="Node2D" parent="."]
-position = Vector2( 2.14748e+09, 2.14748e+09 )
 __meta__ = {
 "_edit_lock_": true
 }
